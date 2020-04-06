@@ -14,7 +14,6 @@ module.exports = {
   module: {
     rules: [
       {
-        // Compile ES2015 using babel
         test: /\.js$/,
         include: [resolve(".")],
         exclude: [/node_modules/],
@@ -26,13 +25,16 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"]
       }
     ]
   },
 
-  // Optional: Enables reading mapbox token from environment variable
   plugins: [
-    new HtmlWebpackPlugin({ title: "react-map-gl Example" }),
+    new HtmlWebpackPlugin({ title: "TravelMap" }),
     new webpack.EnvironmentPlugin(["MapboxAccessToken"])
   ]
 };

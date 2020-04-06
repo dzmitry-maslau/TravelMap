@@ -15,8 +15,8 @@ export const countryReducer = (state = [], action) => {
     case "ADD":
       return [...state, action.stateUS];
     case "DELETE":
-      let newArrayOfStates = [...state];
-      let statesFilterFunc = newArrayOfStates.filter(
+      const newArrayOfStates = [...state];
+      const statesFilterFunc = newArrayOfStates.filter(
         state => state !== action.stateUS
       );
       return [...statesFilterFunc];

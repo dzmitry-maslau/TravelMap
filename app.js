@@ -2,12 +2,13 @@ import ReactDOM from "react-dom";
 import { Provider, connect } from "react-redux";
 import mapboxgl from "mapbox-gl";
 import React from "react";
-
-import { addState, deleteState } from "./redux";
 import store from "./redux";
+import { addState, deleteState } from "./redux";
+import "mapbox-gl/dist/mapbox-gl.css";
+import Favicon from "react-favicon";
+const mapboxSdk = require("@mapbox/mapbox-sdk/services/geocoding.js");
 const { states } = require("./states");
 const { config } = require("./config");
-// import { render } from "react-dom";
 
 let hoveredStateId = [];
 
@@ -75,6 +76,26 @@ class Application extends React.Component {
       });
     });
 
+    var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+    mapboxClient
+      .forwardGeocode({
+        query: "Jersey City",
+        autocomplete: false,
+        limit: 1
+      })
+      .send()
+      .then(function(response) {
+        if (
+          response &&
+          response.body &&
+          response.body.features &&
+          response.body.features.length
+        ) {
+          var feature = response.body.features[0];
+          new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+        }
+      });
+
     map.on("click", "state-fills", e => {
       if (e.features.length > 0) {
         if (!hoveredStateId.includes(e.features[0].id)) {
@@ -103,10 +124,10 @@ class Application extends React.Component {
   }
 
   render() {
-    let statesFromState = states.features.filter(element =>
+    const statesFromState = states.features.filter(element =>
       this.props.usStates.includes(element.properties.STATE_NAME)
     );
-    let stateIDFromState = statesFromState.map(element => element.id);
+    const stateIDFromState = statesFromState.map(element => element.id);
     hoveredStateId = stateIDFromState;
 
     return (
@@ -137,13 +158,11 @@ const mapDispatchToProps = {
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(Application);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>,
+  <div>
+    <Favicon url="favicon.png" />
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
+  </div>,
   document.body.appendChild(document.createElement("div"))
 );
-
-// render(
-//   <Application />,
-//   document.body.appendChild(document.createElement("div"))
-// );
