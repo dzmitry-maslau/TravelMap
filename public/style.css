@@ -1,0 +1,59 @@
+body {
+  background: #f5f5f5;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.container {
+  margin-top: 30px;
+}
+
+.jumbotron {
+  background-color: transparent;
+}
+
+.card {
+  padding-top: 30px;
+}
+
+.card img {
+  object-fit: contain;
+  height: 100px;
+}
+
+.mapContainer {
+  margin-bottom: 40px;
+}
+
+.badge {
+  font-size: 18px;
+  background-color: transparent;
+}
+
+.card-title {
+  font-size: 20px;
+  text-align: center;
+}
+
+.visited .row-cols-md-3 > * {
+  -ms-flex: 0 0 25%;
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.visited .mb-4 {
+  margin-bottom: 10px !important;
+}
+
+.visited .col {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.card-list {
+  list-style-type: none;
+  padding-inline-start: 20px;
+}

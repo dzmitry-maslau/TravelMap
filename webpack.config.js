@@ -5,8 +5,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: "development",
 
-  entry: {
-    app: resolve("./app.js")
+  entry: ["babel-polyfill", "./client/index"],
+
+  output: {
+    path: resolve(__dirname, "public"),
+    filename: "./bundle.js",
   },
 
   devtool: "source-map",
@@ -21,20 +24,24 @@ module.exports = {
           {
             loader: "babel-loader",
             options: {
-              presets: ["@babel/env", "@babel/react"]
-            }
-          }
-        ]
+              presets: ["@babel/env", "@babel/react"],
+            },
+          },
+        ],
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({ title: "TravelMap" }),
-    new webpack.EnvironmentPlugin(["MapboxAccessToken"])
-  ]
+  devServer: {
+    historyApiFallback: true,
+  },
+
+  // plugins: [
+  //   new HtmlWebpackPlugin({ title: "TravelMap" }),
+  //   new webpack.EnvironmentPlugin(["MapboxAccessToken"]),
+  // ],
 };
