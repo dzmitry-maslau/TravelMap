@@ -19,7 +19,7 @@ export const UserHome = (props) => {
         {firstName ? (
           <p>Please go to <a className="badge badge-light" href="/states">USA</a> or <a className="badge badge-light" href="/world">World</a> tabs to get full experience of TravelMap.</p>
         ) : (
-          <p>Please Login or Sign Up to get full experience of TravelMap.</p>
+          <p>Please <a className="badge badge-light" href="/login">Login</a> or <a className="badge badge-light" href="/signup">Sign Up</a> to get full experience of TravelMap.</p>
         )}
       </div>
     </div>

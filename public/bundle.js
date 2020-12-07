@@ -270,7 +270,13 @@ var UserHome = function UserHome(props) {
   }, "USA"), " or ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "badge badge-light",
     href: "/world"
-  }, "World"), " tabs to get full experience of TravelMap.") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Please Login or Sign Up to get full experience of TravelMap.")));
+  }, "World"), " tabs to get full experience of TravelMap.") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Please ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "badge badge-light",
+    href: "/login"
+  }, "Login"), " or ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "badge badge-light",
+    href: "/signup"
+  }, "Sign Up"), " to get full experience of TravelMap.")));
 };
 
 var mapState = function mapState(state) {
