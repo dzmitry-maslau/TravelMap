@@ -1,10 +1,7 @@
 {
   "scripts": {
-    "start": "webpack-dev-server --progress --hot --open",
-    "start:dev": "npm run build-watch & npm run start-server",
-    "start-server": "nodemon --watch server main.js",
-    "build-watch": "webpack -w",
-    "seed": "node seed.js"
+    "start": "node main.js",
+    "build": "webpack"
   },
   "engines": {
     "node": "14.x"
