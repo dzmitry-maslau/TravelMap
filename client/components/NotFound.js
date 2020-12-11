@@ -1,6 +1,6 @@
 import React from "react";
 
-export default props => {
+export default (props) => {
   return (
     <div>
       <h2>Page doesn't exist</h2>

@@ -42,6 +42,11 @@ const Root = ({ handleClick, isLoggedIn }) => {
             {/* The navbar will show these links after you log in */}
             <ul className="navbar-nav">
               <li className="nav-item">
+                <Link className="nav-link" to="/account">
+                  Account
+                </Link>
+              </li>
+              <li className="nav-item">
                 <a className="nav-link" href="#" onClick={handleClick}>
                   Logout
                 </a>

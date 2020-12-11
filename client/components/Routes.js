@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 import Main from "./Main";
 import About from "./About";
-import { Login, Signup } from "./Login";
 import World from "./World";
 import States from "./States";
+import Account from "./Account";
 import NotFound from "./NotFound";
+import { Login, Signup } from "./Login";
 import { me } from "../store/user_redux";
 
 class Routes extends Component {
@@ -30,11 +31,12 @@ class Routes extends Component {
               {/* Routes placed here are only available after logging in */}
               <Route exact path="/states" component={States} />
               <Route exact path="/world" component={World} />
+              <Route exact path="/account" component={Account} />
               <Route exact path="*" component={NotFound} />
             </Switch>
           )}
           {/* Displays NotFound component as a fallback */}
-          <Route exact path="*" component={NotFound} />
+          {/* <Route exact path="*" component={NotFound} /> */}
         </Switch>
       </main>
     );
