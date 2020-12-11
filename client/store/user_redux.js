@@ -23,7 +23,6 @@ export const auth = (email, password, method, firstName) => async (
 ) => {
   let res;
   try {
-    console.log(email, password, method, firstName);
     if (method === "signup") {
       res = await axios.post(`/auth/signup`, { email, password, firstName });
     } else {
@@ -34,7 +33,7 @@ export const auth = (email, password, method, firstName) => async (
   }
   try {
     dispatch(getUser(res.data));
-    history.push("/");
+    history.push("/states");
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
   }

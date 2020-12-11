@@ -21,6 +21,7 @@ class World extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.props.getAllCountries();
 
     const map = new mapboxgl.Map({
@@ -196,6 +197,7 @@ class World extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.userReducer,
   countries: state.countryReducer,
   userId: state.userReducer.id,
 });

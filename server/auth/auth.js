@@ -24,8 +24,11 @@ router.post("/signup", async (req, res, next) => {
     const user = await User.create(req.body);
     req.login(user, (err) => (err ? next(err) : res.json(user)));
   } catch (err) {
+    console.log(err.name);
     if (err.name === "SequelizeUniqueConstraintError") {
       res.status(401).send("User already exists");
+    } else if (err.name === "SequelizeValidationError") {
+      res.status(401).send("Most likely your Email is not valid");
     } else {
       next(err);
     }

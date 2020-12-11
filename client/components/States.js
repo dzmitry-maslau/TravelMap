@@ -78,33 +78,33 @@ class States extends React.Component {
       });
     });
 
-    var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
-    mapboxClient
-      .forwardGeocode({
-        query: "Jersey City",
-        autocomplete: false,
-        limit: 1,
-      })
-      .send()
-      .then(function (response) {
-        if (
-          response &&
-          response.body &&
-          response.body.features &&
-          response.body.features.length
-        ) {
-          var feature = response.body.features[0];
+    // var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+    // mapboxClient
+    //   .forwardGeocode({
+    //     query: "Jersey City",
+    //     autocomplete: false,
+    //     limit: 1,
+    //   })
+    //   .send()
+    //   .then(function (response) {
+    //     if (
+    //       response &&
+    //       response.body &&
+    //       response.body.features &&
+    //       response.body.features.length
+    //     ) {
+    //       var feature = response.body.features[0];
 
-          let elem = document.createElement("div");
-          elem.className = "marker";
-          elem.style.backgroundImage =
-            "url(https://img.icons8.com/material-sharp/24/000000/marker.png)";
-          elem.style.width = "25px";
-          elem.style.height = "25px";
+    //       let elem = document.createElement("div");
+    //       elem.className = "marker";
+    //       elem.style.backgroundImage =
+    //         "url(https://img.icons8.com/material-sharp/24/000000/marker.png)";
+    //       elem.style.width = "25px";
+    //       elem.style.height = "25px";
 
-          new mapboxgl.Marker(elem).setLngLat(feature.center).addTo(map);
-        }
-      });
+    //       new mapboxgl.Marker(elem).setLngLat(feature.center).addTo(map);
+    //     }
+    //   });
 
     map.on("click", "state-fills", (e) => {
       if (e.features.length > 0) {
