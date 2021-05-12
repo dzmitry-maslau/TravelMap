@@ -22,6 +22,19 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.put("/:id", async (req, res, next) => {
+  try {
+    const singleUser = await User.findByPk(req.params.id);
+    singleUser.firstName = req.body.firstName;
+    singleUser.email = req.body.email;
+    singleUser.style = req.body.style;
+    await singleUser.save();
+    res.sendStatus(201);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete("/", async (req, res, next) => {
   try {
     await User.destroy({

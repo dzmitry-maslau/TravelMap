@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import mapboxgl from "mapbox-gl";
 import React from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { addState, deleteState, getAllStates } from "../store/redux";
+import { addState, deleteState, getAllStates } from "../store/states";
 const { states } = require("../../states");
 const { config } = require("../../config");
 const mapboxSdk = require("@mapbox/mapbox-sdk/services/geocoding.js");
@@ -15,9 +15,8 @@ class States extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      style: "mapbox://styles/mapbox/light-v10",
-      lng: -100.486052,
-      lat: 37.830348,
+      lng: -100,
+      lat: 45,
       zoom: 2,
     };
   }
@@ -27,12 +26,13 @@ class States extends React.Component {
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: this.state.style,
+      style: `mapbox://styles/mapbox/${this.props.user.style}-v10`,
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
 
     map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new mapboxgl.FullscreenControl());
 
     map.on("load", function () {
       map.addSource("states", {
@@ -94,14 +94,12 @@ class States extends React.Component {
     //       response.body.features.length
     //     ) {
     //       var feature = response.body.features[0];
-
     //       let elem = document.createElement("div");
     //       elem.className = "marker";
     //       elem.style.backgroundImage =
     //         "url(https://img.icons8.com/material-sharp/24/000000/marker.png)";
     //       elem.style.width = "25px";
     //       elem.style.height = "25px";
-
     //       new mapboxgl.Marker(elem).setLngLat(feature.center).addTo(map);
     //     }
     //   });
@@ -156,17 +154,18 @@ class States extends React.Component {
 
     return (
       <div>
+        <h5 className="map-help">Please click on the map to add any State</h5>
         <div
           style={{
             width: "100%",
-            height: "80vh",
+            height: "70vh",
           }}
           ref={(el) => (this.mapContainer = el)}
           className="mapContainer"
         />
         <div>
           <p>
-            <b>Visited US Territories:</b> {statesFromState.join(", ")}
+            <b>Visited U.S. Territories:</b> {statesFromState.join(", ")}
           </p>
           <p>
             <b>Percent of Total:</b> {statesFromState.length} of 56,{" "}
@@ -179,8 +178,9 @@ class States extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  usStates: state.stateReducer,
-  userId: state.userReducer.id,
+  user: state.user,
+  usStates: state.state,
+  userId: state.user.id,
 });
 
 const mapDispatchToProps = (dispatch) => {

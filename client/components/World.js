@@ -1,37 +1,33 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
-import { addCountry, deleteCountry, getAllCountries } from "../store/redux";
-
-const { config } = require("../../config");
+import { addCountry, deleteCountry, getAllCountries } from "../store/countries";
 
 let hoveredStateId = [];
 let countryNames = [];
-
-mapboxgl.accessToken = config.mapboxKey;
 
 class World extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: -0.1275,
-      lat: 51.507222,
-      zoom: 1.5,
+      lng: -0.13,
+      lat: 31.5,
+      zoom: 1,
     };
   }
 
   componentDidMount() {
-    console.log(this.props);
     this.props.getAllCountries();
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: "mapbox://styles/mapbox/light-v10",
+      style: `mapbox://styles/mapbox/${this.props.user.style}-v10`,
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
 
     map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new mapboxgl.FullscreenControl());
 
     map.on("load", function () {
       map.addLayer({
@@ -153,17 +149,18 @@ class World extends React.Component {
 
     return (
       <div>
+        <h5 className="map-help">Please click on the map to add any country</h5>
         <div
           style={{
             width: "100%",
-            height: "80vh",
+            height: "70vh",
           }}
           ref={(el) => (this.mapContainer = el)}
           className="mapContainer"
         />
         <div className="visited">
-          <h4>Visited Countries:</h4>
-          <div className="row row-cols-1 row-cols-md-3">
+          {countries.length > 0 && <h5>Visited Countries:</h5>}
+          <div className="row row-cols-1 row-cols-md-4">
             {countries &&
               countries.map((element) => {
                 return (
@@ -197,9 +194,9 @@ class World extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.userReducer,
-  countries: state.countryReducer,
-  userId: state.userReducer.id,
+  user: state.user,
+  countries: state.country,
+  userId: state.user.id,
 });
 
 const mapDispatchToProps = (dispatch) => {

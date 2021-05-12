@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
+import { changeName } from "../store/user";
 
 class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: props.user.firstName,
-      email: props.user.email,
+      firstName: this.props.user.firstName,
+      email: this.props.user.email,
+      style: this.props.user.style,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,6 +20,12 @@ class Account extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.props.changeName(
+      this.state.firstName,
+      this.state.email,
+      this.props.user.id,
+      this.state.style
+    );
   }
 
   render() {
@@ -45,6 +53,54 @@ class Account extends React.Component {
               onChange={this.handleChange}
             />
           </div>
+          <div>
+            <label htmlFor="style">Map style</label>
+            <div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  id="lightstyle"
+                  value="light"
+                  name="style"
+                  checked={this.state.style === "light"}
+                  onChange={this.handleChange}
+                />
+                <label className="form-check-label" htmlFor="lightstyle">
+                  Light Style
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  id="darkstyle"
+                  value="dark"
+                  name="style"
+                  checked={this.state.style === "dark"}
+                  onChange={this.handleChange}
+                />
+                <label className="form-check-label" htmlFor="darkstyle">
+                  Dark Style
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  id="streetsstyle"
+                  value="streets"
+                  name="style"
+                  checked={this.state.style === "streets"}
+                  onChange={this.handleChange}
+                />
+                <label className="form-check-label" htmlFor="streetsstyle">
+                  Streets Style
+                </label>
+              </div>
+            </div>
+          </div>
+          <br />
           <button type="submit" className="btn btn-primary">
             Save
           </button>
@@ -54,10 +110,17 @@ class Account extends React.Component {
   }
 }
 
-const mapState = (state) => {
+const mapStateToProps = (state) => {
   return {
-    user: state.userReducer,
+    user: state.user,
   };
 };
 
-export default connect(mapState)(Account);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeName: (name, email, id, style) =>
+      dispatch(changeName(name, email, id, style)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account);
