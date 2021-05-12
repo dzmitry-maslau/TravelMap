@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 import Main from "./Main";
+import Parks from "./Parks";
+import SinglePark from "./SinglePark";
 import About from "./About";
 import World from "./World";
 import States from "./States";
 import Account from "./Account";
 import NotFound from "./NotFound";
+import Wishlist from "./Wishlist";
 import { Login, Signup } from "./Login";
-import { me } from "../store/user_redux";
+import { me } from "../store/user";
 
 class Routes extends Component {
   componentDidMount() {
@@ -31,6 +34,9 @@ class Routes extends Component {
               {/* Routes placed here are only available after logging in */}
               <Route exact path="/states" component={States} />
               <Route exact path="/world" component={World} />
+              <Route exact path="/wishlist" component={Wishlist} />
+              <Route exact path="/parks" component={Parks} />
+              <Route exact path="/parks/:id" component={SinglePark} />
               <Route exact path="/account" component={Account} />
               <Route exact path="*" component={NotFound} />
             </Switch>
@@ -45,7 +51,7 @@ class Routes extends Component {
 
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.userReducer.id,
+    isLoggedIn: !!state.user.id,
   };
 };
 

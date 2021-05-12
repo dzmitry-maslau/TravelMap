@@ -24,7 +24,7 @@ export default () => {
       </p>
       <div>
         <p>
-          <img src="/portfolio.jpg" alt="" width="20%" height="20%"></img>
+          <img src="portfolio.jpg" alt="" width="20%" height="20%"></img>
         </p>
       </div>
       <a

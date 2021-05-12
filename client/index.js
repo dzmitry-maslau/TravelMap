@@ -1,11 +1,11 @@
-import ReactDOM from "react-dom";
 import React from "react";
+import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-// import Favicon from "react-favicon";
-import Root from "./components/Root";
-import store from "./store/redux";
 import { Router } from "react-router-dom";
+// import Favicon from "react-favicon";
 import history from "./history";
+import store from "./store/redux";
+import Root from "./components/Root";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";

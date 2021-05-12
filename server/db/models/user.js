@@ -31,6 +31,10 @@ const User = db.define("user", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  style: {
+    type: Sequelize.STRING,
+    defaultValue: "light",
+  },
 });
 
 module.exports = User;

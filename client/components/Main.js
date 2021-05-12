@@ -48,7 +48,7 @@ export const UserHome = (props) => {
 
 const mapState = (state) => {
   return {
-    firstName: state.userReducer.firstName,
+    firstName: state.user.firstName,
   };
 };
 
