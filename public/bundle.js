@@ -1978,7 +1978,7 @@ var addCountry = function addCountry(name, id, shortName, userId) {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://restcountries.eu/rest/v2/alpha/".concat(shortName));
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://restcountries.com//v3.1/alpha/".concat(shortName));
 
             case 3:
               _yield$Axios$get2 = _context2.sent;
@@ -1988,9 +1988,9 @@ var addCountry = function addCountry(name, id, shortName, userId) {
                 userId: userId,
                 country: name,
                 countryId: id,
-                flag: info.flag,
-                capital: info.capital,
-                population: info.population
+                flag: info[0].flags.svg,
+                capital: info[0].capital[0],
+                population: info[0].population
               });
 
             case 7:

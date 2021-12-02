@@ -21,15 +21,15 @@ export const addCountry = (name, id, shortName, userId) => {
   return async (dispatch) => {
     try {
       const { data: info } = await Axios.get(
-        `https://restcountries.eu/rest/v2/alpha/${shortName}`
+        `https://restcountries.com//v3.1/alpha/${shortName}`
       );
       const { data } = await Axios.post("/api/countries", {
         userId: userId,
         country: name,
         countryId: id,
-        flag: info.flag,
-        capital: info.capital,
-        population: info.population,
+        flag: info[0].flags.svg,
+        capital: info[0].capital[0],
+        population: info[0].population,
       });
       dispatch(addedCountry(data));
     } catch (error) {
